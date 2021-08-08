@@ -1,19 +1,11 @@
-class ApplicationController < ActionController::API
-  def index
-    infoUser = Usuario.all
-    render json: datosUser, status: 200
+class ApplicationController < ActionController::Base
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
+  protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:nombres,:apellidos,:celular,:email,:password,:password_confirmation])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:celular,:nombres,:apellidos])
   end
 
-  def create
   end
-
-  def show
-  end
-
-  def update
-  end
-
-  def destroy
-  end
-
-end
