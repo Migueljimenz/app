@@ -1,6 +1,6 @@
 class Usuario < ApplicationRecord
-  validates :nombre, :email, :edad, presence: true
-  validates :email, uniqueness: true
-  validates :nombre, length: { minimum: 3 }
-  validates :email, format:{ with: URI::MailTo::EMAIL_REGEXP }
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable
 end
